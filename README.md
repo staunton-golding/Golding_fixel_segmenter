@@ -62,7 +62,7 @@ The file pipeline_github.m shows a clear example of how this algorithm is used. 
 
 **Credits**
 
-This research was conducted under the guidance of Dr. Adam Anderson of Vanderbilt University. It was supported by the VUSRP, and conducted with the Vanderbilt University Institute of Imaging Sciences.
+This research was conducted under the guidance of Dr. Adam Anderson of Vanderbilt University. It was supported by the VUSRP, and conducted with the Vanderbilt University Institute of Imaging Science.
 
 **License**
 
