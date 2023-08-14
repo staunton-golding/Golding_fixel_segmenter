@@ -1,8 +1,9 @@
 # Fixel_segmenter
 Identifies fixel orientation from .mif FODF files (MRTrix3)
 
-**Improved Angular Resolution of Neuronal Fiber Segmentation in Diffusion Magnetic Resonance Imaging 
-Project Description**
+**Improved Angular Resolution of Neuronal Fiber Segmentation in Diffusion Magnetic Resonance Imaging** 
+
+**Project Description**
 
 This repository takes as input a Fiber Orientation Distribution Function (FODF) .mif file, as well as some supporting MRTrix3 filetype files, and outputs a Fixel.mif file. The algorithm leverages the cylindrical symmetry inherent in single fiber FODFs and the property of FODFs wherein a multifixel - FODF is the summation of single fiber FODFs. The algorithm iteratively scales, rotates, and fits a brain-specific model FODF (a FODF modeling a parallelly oriented fiber bundle) to every FODF in the white matter. It does this (potentially) multiple times per target FODF, until a threshold is reached. The algorithm is thresholded to find fixels with max heights no smaller than 0.1 units, and no smaller than 20% of that voxel’s largest found fixel’s max height. This is to prevent noise effects and ringing effects. Found fixels are also passed through a geometric filter wherein a voxel’s fixel model is considered acceptable when each candidate fixel deviates less than 35 degrees from matching fixels in the nearest-neighbor voxels. The results of this algorithm can be found in the POSTER file. A short summation - this algorithm found ~1.5 times as many fixels as current best segmentation algorithms (peak-finding and SIFT), and found multiple fixels in ~71% of white matter voxels (compared to multiple fixels being found in ~ 45% of WM voxels via peak-finding and SIFT protocols). Information on datasets used for evaluation can be found in the POSTER file as well. My Macbook Air M2 took ~ 4 hours to run this algorithm on a 96x96x60 whole brain dataset with FODF degree 8 (45 coefficients per voxel). I am presenting this algorithm and its results at the BMES annual meeting in October of this year (2023). I am currently working on rewriting all functions in python.
 					
@@ -43,6 +44,7 @@ The algorithm also uses a few suites of functions written by others
   - https://github.com/MRtrix3/mrtrix3/blob/master/LICENCE.txt
 
 **How to use it**
+
 The file pipeline_github.m shows a clear example of how this algorithm is used. First, a white matter FODF file, and a fixel.mif file (peak-finding fixel file) is loaded, as well as a file containing index information about the voxels used in white matter response function estimation. MRtrix3 has more information on all these file types. From here, the steps are as follows
 
 - Create mask using fixel.mif file
@@ -59,7 +61,9 @@ The file pipeline_github.m shows a clear example of how this algorithm is used. 
 
 
 **Credits**
+
 This research was conducted under the guidance of Dr. Adam Anderson of Vanderbilt University. It was supported by the VUSRP, and conducted with the Vanderbilt University Institute of Imaging Sciences.
 
 **License**
+
 Mozilla Public License 2.0 (found in LICENSE file)
