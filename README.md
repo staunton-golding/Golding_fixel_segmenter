@@ -1,7 +1,7 @@
 # Fixel_segmenter
 Identifies fixel orientation from .mif FODF files (MRTrix3)
-_
-__**Improved Angular Resolution of Neuronal Fiber Segmentation in Diffusion Magnetic Resonance Imaging**__ _
+
+_**Improved Angular Resolution of Neuronal Fiber Segmentation in Diffusion Magnetic Resonance Imaging**_
 
 **Project Description**
 
