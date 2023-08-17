@@ -3,8 +3,8 @@ function [dir,mask_total, total_fix, number_of_fifty_uses] = run_fixel_wrapper(a
 %
 % run_fixel_wrapper iterates the function 'fixel_wrapper' over the
 % entirety of the whole brain white matter (or simulated) mask, and outputs
-% that functions results in a data structure easily able to be converted to
-% the .mif fixel data format (that conversion is done in a later function).
+% from this function are stored in a data structure easily able to be converted to
+% the .mif fixel data format (that conversion is done in a later function (run_geometric_wrapper)).
 % Many of the inputs are the same as the function 'fixel_wrapper'
 %
 % Input Variables
