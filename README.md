@@ -1,4 +1,4 @@
-# Fixel_segmenter
+# Golding_fixel_segmenter
 Identifies fixel orientation from .mif FODF files (MRTrix3)
 
 _**Improved Angular Resolution of Neuronal Fiber Segmentation in Diffusion Magnetic Resonance Imaging**_
