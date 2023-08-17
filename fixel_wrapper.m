@@ -6,13 +6,12 @@ function [directions_scaling, number_of_fixels, fifty_one_voxel] = fixel_wrapper
 % cylindrically symmetric set of points / cap on the test FODF, removing the
 % rotated and scaled single fiber FODF each time. This function stops the
 % iterative process once no cylindrically symmetric cap is able to be
-% found, or once the remaining found fixels would be less than 10% of the
-% largest fixel yet found in the FODF. This 10% metric can be adjusted by
-% adjusting the variable "off_max" on line 111. The default threshold of
-% max fixel size = 0.1 units is inline with current FODF segmentation
+% found, or once the remaining found fixels would be less than 0.1 units. This 0.1 threshold 
+% standard best practice (https://onlinelibrary.wiley.com/doi/abs/10.1002/hbm.22099) 
+% The default threshold of max fixel size = 0.1 units is inline with current FODF segmentation
 % method standards, changing this threshold hold value is done by changing
 % the last value on line 115 
-% 'while abs_max>off_max*starting_max&&abs_max>0.1'
+% 'while abs_max>>0.1'
 % 
 % Input Variables:
 %   
@@ -106,11 +105,7 @@ fifty_one_voxel=0;
 starting_max=max(max(fixel_lib(:,1)));
 abs_max=starting_max;
 
-%to prevent ringing and noise affects, smallest fixel cant be smaller than
-%20% of biggest fixel
-off_max=.2;
-
-while abs_max>off_max*starting_max&&abs_max>0.1
+while abs_max>0.1
     %increase counter (for number of fixels found)
     aa=aa+1;
     
@@ -166,11 +161,7 @@ while abs_max>off_max*starting_max&&abs_max>0.1
     %above, abs_max also defined at end of loop after fixel removed, so
     %that a new cycle wont be started with a too small abs_max
     abs_max=kern;
-    
-    if(abs_max<off_max*starting_max)
-        break
-    end
-    
+
     for delt_eigen=20:5:50
     %parameter for difference in delta eigenvalues (percent ratios)
 
@@ -292,9 +283,6 @@ while abs_max>off_max*starting_max&&abs_max>0.1
     
     %reset abs_max
     abs_max=(max(max(fixel_lib(:,1))));
-    if(abs_max<off_max*starting_max)
-        break
-    end
 
     %first_sph needs to be rewritten - so that new fixel removed FOD can be
     %reoriented with new max value (could use original azi and ela angle,
