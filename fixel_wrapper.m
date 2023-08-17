@@ -6,7 +6,7 @@ function [directions_scaling, number_of_fixels, fifty_one_voxel] = fixel_wrapper
 % cylindrically symmetric set of points / cap on the test FODF, removing the
 % rotated and scaled single fiber FODF each time. This function stops the
 % iterative process once no cylindrically symmetric cap is able to be
-% found, or once the remaining found fixels would be less than 0.1 units. This 0.1 threshold 
+% found, or once the remaining found fixels would be less than 0.1 units. This 0.1 threshold is
 % standard best practice (https://onlinelibrary.wiley.com/doi/abs/10.1002/hbm.22099) 
 % The default threshold of max fixel size = 0.1 units is inline with current FODF segmentation
 % method standards, changing this threshold hold value is done by changing
