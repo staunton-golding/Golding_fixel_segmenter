@@ -10,6 +10,8 @@ function [mag_fixel, dir_fixel, ind_fixel] = run_geometric_wrapper(dir,seperatio
 % oriented is user-defined. The function outputs the data portion for the
 % direction, magnitude, and index .mif files to be written
 %
+% To write a .mif file without any filtering, simply set number_to_compare = 0 
+%
 % Input Variables:
 %
 %   dir: an nx1 cell array where each cell input corresponds to mx4 matrix
