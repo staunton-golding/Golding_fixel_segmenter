@@ -5,12 +5,12 @@ wmfod_file=read_mrtrix('/Volumes/NO NAME/DWI/wm_3000t.mif');
 wmfod_matlab=wmfod_file.data;
 
 %use fixel direction transfrom from a lobe-based method (peak here)
-direction_transform=read_mrtrix('/Volumes/NO NAME/DWI/pipeline/peak_fixels/directions.mif');
+direction_transform=read_mrtrix('/Volumes/NO NAME/DWI/pipeline/SIFT_ss3t.mif/directions.mif');
 direction_transform_save=direction_transform.transform;
 
 %mask to only segment fixels segmeneted with lobe-based method (for
 %comparison, also selects WM voxels easily)
-premask=read_mrtrix('/Volumes/NO NAME/DWI/pipeline/fixel.mif/index.mif');
+premask=read_mrtrix('/Volumes/NO NAME/DWI/pipeline/SIFT_ss3t.mif/index.mif');
 premask=premask.data;
 
 %load voxels that are used in WM RF estimation
@@ -91,12 +91,11 @@ number_to_compare=2;
 %CREATE HISTOGRAMS
 
 %load comparison fixel segmentations
-mr_fix_SIFT=read_mrtrix('/Volumes/NO NAME/DWI/pipeline/SIFT_ss3t.mif/index.mif');
 mr_fix_PEAK=read_mrtrix('/Volumes/NO NAME/DWI/pipeline/peak_fixels/index.mif');
+mr_fix_SIFT=premask;
 
 mr_fix_PEAK=mr_fix_PEAK.data;
 mr_fix_PEAK=mr_fix_PEAK(:,:,:,1);
-mr_fix_SIFT=mr_fix_SIFT.data;
 mr_fix_SIFT=mr_fix_SIFT(:,:,:,1);
 
 %pass through only number of fixels per voxel, not index of fixel in directions.mif
