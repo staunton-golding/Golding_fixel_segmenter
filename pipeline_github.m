@@ -93,40 +93,52 @@ number_to_compare=2;
 %load comparison fixel segmentations
 mr_fix_SIFT=read_mrtrix('/Volumes/NO NAME/DWI/pipeline/SIFT_ss3t.mif/index.mif');
 mr_fix_PEAK=read_mrtrix('/Volumes/NO NAME/DWI/pipeline/peak_fixels/index.mif');
+
 mr_fix_PEAK=mr_fix_PEAK.data;
+mr_fix_PEAK=mr_fix_PEAK(:,:,:,1);
 mr_fix_SIFT=mr_fix_SIFT.data;
+mr_fix_SIFT=mr_fix_SIFT(:,:,:,1);
+
+%pass through only number of fixels per voxel, not index of fixel in directions.mif
+ind_fixel_for_comparison=ind_fixel(:,:,:,1);
 
 %Find total number of fixels found with each modality
-SIFT_fixels_found=sum(sum(sum(sum(mr_fix_comp_SIFT,4))))
-PEAK_finding_fixels_found=sum(sum(sum(sum(mr_fix_comp_PEAK,4))))
-my_found_fixels=sum(sum(sum(sum(ind_fixel,4))))
+SIFT_fixels_found=sum(sum(sum(sum(mr_fix_SIFT))))
+PEAK_finding_fixels_found=sum(sum(sum(sum(mr_fix_PEAK))))
+my_found_fixels=sum(sum(sum(sum(ind_fixel_for_comparison))))
 
 %voxels with at least 1 found fixel
-idx_mine=ind_fixel>0;
+idx_mine=ind_fixel_for_comparison>0;
 idx_SIFT=mr_fix_SIFT>0;
 idx_PEAK=mr_fix_PEAK>0;
 
 %total percentage of WM voxels with >1 fixel
-my_multi_fixel_percent=sum(sum(sum(ind_fixel(:,:,:,1)>1)))/size((find(mask)),1)*100
-peak_multi_fixel_percent=sum(sum(sum(mr_fix_PEAK(:,:,:,1)>1)))/size((find(mask)),1)*100
-SIFT_multi_fixel_percent=sum(sum(sum(mr_fix_SIFT(:,:,:,1)>1)))/size((find(mask)),1)*100
+my_multi_fixel_percent=sum(sum(sum(ind_fixel_for_comparison>1)))/size((find(mask)),1)*100
+peak_multi_fixel_percent=sum(sum(sum(mr_fix_PEAK>1)))/size((find(mask)),1)*100
+SIFT_multi_fixel_percent=sum(sum(sum(mr_fix_SIFT>1)))/size((find(mask)),1)*100
 
 figure
-
-histogram(comp_fix(idx_mine))
+nexttile;
+my_fixels=histogram(ind_fixel_for_comparison(idx_mine));
+my_fixels.FaceColor='r';
 xlabel('Fixels per Voxel')
-ylabel('Voxels')
-title('my fixels')
+ylabel('Number of Voxels')
+title('My fixels')
 
-histogram(mr_fix_comp_SIFT(idx_SIFT))
+nexttile;
+sift=histogram(mr_fix_SIFT(idx_SIFT));
+sift.FaceColor="#77AC30";
 xlabel('Fixels per Voxel')
 ylabel('Voxels')
 title('SIFT fixels')
 
-histogram(mr_fix_comp_PEAK(idx_PEAK))
+nexttile;
+histogram(mr_fix_PEAK(idx_PEAK))
 xlabel('Fixels per Voxel')
 ylabel('Voxels')
-title('peak fixels')
+title('Peak fixels')
+
+clear ind_fixel_for_comparison
 
 %needed for python zero indexing (for mrview in MRTrix3)
 ind_fixel(:,:,:,2)=ind_fixel(:,:,:,2)-1;
