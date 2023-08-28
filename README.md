@@ -73,3 +73,10 @@ This research was conducted under the guidance of Dr. Adam Anderson of Vanderbil
 **License**
 
 Mozilla Public License 2.0 (found in LICENSE file)
+
+**Citations**
+
+Please cite this research with the following:
+
+Golding, S. & Anderson, A. (2023, October 11-14) _'Improved Angular Resolution of Neuronal Fiber Segmentation in Diffusion Magnetic Resonance Imaging'_ [Conference presentation abstract] 2023 Biomedical Engineering Society Annual Meeting, Seattle, WA, United States.
+
