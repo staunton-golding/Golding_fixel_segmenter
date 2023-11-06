@@ -133,12 +133,12 @@ end
 fix_ang_sep_mat(14,:)=[];
 
 %ignore voxels parallel to fixel of interest
-idx_non_parallel=find(abs(fix_ang_sep_mat(:,4))<90-22.5);
+idx_approx_parallel=find(abs(fix_ang_sep_mat(:,4))<90-22.5);
 
 %vox gives number of coherently oriented fixels in voxels approximately
 %inline with fixel of interest
 
-vox=sum(sum(fix_ang_sep_mat(idx_non_parallel,5:end)<seperation_between_voxels));
+vox=sum(sum(fix_ang_sep_mat(idx_approx_parallel,5:end)<seperation_between_voxels));
 
 %if number of coherently oriented fixels less than number to compare,
 %delete fixel of interest
